@@ -1,0 +1,10 @@
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\obj\Debug\KeygenDLL.csprojAssemblyReference.cache
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\obj\Debug\KeygenDLL.csproj.CoreCompileInputs.cache
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\bin\Debug\KeygenDLL.dll
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\bin\Debug\KeygenDLL.pdb
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\obj\Debug\KeygenDLL.dll
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\obj\Debug\KeygenDLL.pdb
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\bin\Debug\KeygenDLLGui.exe
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\bin\Debug\KeygenDLLGui.pdb
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\bin\Debug\KeygenDLLGui.exe.config
+C:\Users\tiphergane\source\repos\KeygenDLL\KeygenDLL\obj\Debug\KeygenDLL.csproj.CopyComplete
