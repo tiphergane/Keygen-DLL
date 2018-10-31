@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace KeygenDLL
@@ -28,7 +28,7 @@ namespace KeygenDLL
             switch (menu)
             {
                 case "keygen1":
-                    return Keygen1(miaou);
+                    return Keygen1(miaou); //on récupère la réponse du keygen avec en paramètre le pseudonyme.
                 case "keygen2":
                     return Keygen2(miaou);
                 default:
@@ -117,12 +117,16 @@ namespace KeygenDLL
         /// <returns></returns>
         public string Keygen2(string pseudo)
         {
-            if (pseudo.Length > 2)
+            if (pseudo.Length > 1)
             {
                 byte[] Name = Encoding.Default.GetBytes(pseudo);
                 string Nickname = Encoding.UTF8.GetString(Name);
 
                 string Serial_fin = null;
+                string Serial_debut = null;
+                int ecx = 0;
+                int eax = 0;
+                int esi = 0;
                 int Serial = 0;
                 int j = 0;
                 char[] asciiBytes = Nickname.ToCharArray();
@@ -132,20 +136,45 @@ namespace KeygenDLL
                 {
                     Serial += asciiBytes[i] * j;
                     j++;
-                    Serial_fin = Serial.ToString("X2");
+                    Serial_fin = Serial.ToString("x4");
                 }
 
                 Serial = 0;
                 //Transmet hors de la DLL le résultat de la génération
-                return Serial_fin;
+                //return Serial_fin;
+
+                for (int l = 0; l < pseudo.Length; l++)
+                {
+                    ecx = asciiBytes[l] * 0x100;
+                    int boucle = 8;
+                    for (int k = boucle; k > 1; k--)
+                    {
+                        esi = eax;
+                        esi ^= ecx;
+                        if (esi != Math.Abs(esi))
+                        {
+                            eax <<= 1; //shl en asm, décalage des bits vers la gauche
+                        }
+                        else
+                        {
+                            eax += eax;
+                            eax ^= 0x1021;
+                        }
+                        ecx <<= 1;
+                    }
+                    ecx += 1;
+                }
+                eax += 0x63;
+                Serial_debut = eax.ToString("x4").Substring(4);
+                string result = String.Format("{0:X4}{1:X4}", Serial_debut, Serial_fin).ToUpper();
+                    return result;
             }
 
             else
             {
                 //Transmet hors de la DLL les conditions pour avoir un numéro de série
-                return "vous devez entrer au moins 2 caractères";
+                return "vous devez entrer au moins 2 caractères";              
             }
-
         }
         #endregion
     }
