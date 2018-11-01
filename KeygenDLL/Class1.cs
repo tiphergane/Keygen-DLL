@@ -147,7 +147,7 @@ namespace KeygenDLL
                 {
                     ecx = asciiBytes[l] * 0x100;
                     int boucle = 8;
-                    for (int k = boucle; k > 1; k--)
+                    for (int k = boucle; k > 0; k--)
                     {
                         esi = eax;
                         esi ^= ecx;
