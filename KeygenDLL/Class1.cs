@@ -143,8 +143,6 @@ namespace KeygenDLL
                 }
 
                 Serial = 0;
-                //Transmet hors de la DLL le résultat de la génération
-                //return Serial_fin;
 
                 for (int l = 0; l < pseudo.Length; l++)
                 {
