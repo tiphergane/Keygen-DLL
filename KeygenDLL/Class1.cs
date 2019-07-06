@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 
+
 namespace KeygenDLL
 {
     public class Class1
@@ -10,8 +11,8 @@ namespace KeygenDLL
 
         public string[] Data()
         {
-         string[] KeyList = new string[]{ "keygen1","keygen2"};
-         return KeyList;
+            string[] KeyList = new string[] { "keygen1", "keygen2", "keygen3" };
+            return KeyList;
         }
 
         #endregion
@@ -31,6 +32,8 @@ namespace KeygenDLL
                     return Keygen1(miaou); //on récupère la réponse du keygen avec en paramètre le pseudonyme.
                 case "keygen2":
                     return Keygen2(miaou);
+                case "keygen3":
+                    return Keygen3(miaou);
                 default:
                     return "Vous devez choisir un keygen";
             }
@@ -150,8 +153,9 @@ namespace KeygenDLL
                     for (int k = boucle; k > 0; k--)
                     {
                         esi = eax;
-                        esi ^= ecx;
-                        if (esi != Math.Abs(esi))
+                        esi ^= ecx, ecx;
+                        int si = esi % 10000;
+                        if (si != Math.Abs(si))
                         {
                             eax <<= 1; //shl en asm, décalage des bits vers la gauche
                         }
@@ -167,15 +171,44 @@ namespace KeygenDLL
                 eax += 0x63;
                 Serial_debut = eax.ToString("x4").Substring(4);
                 string result = String.Format("{0:X4}{1:X4}", Serial_debut, Serial_fin).ToUpper();
-                    return result;
+                return result;
             }
 
             else
             {
                 //Transmet hors de la DLL les conditions pour avoir un numéro de série
-                return "vous devez entrer au moins 2 caractères";              
+                return "vous devez entrer au moins 2 caractères";
             }
         }
         #endregion
+
+        #region Keygen3
+        public string Keygen3(string pseudo)
+        {
+            if (pseudo.Length > 4)
+            {
+                byte[] Name = Encoding.Default.GetBytes(pseudo);
+                string Nickname = Encoding.UTF8.GetString(Name);
+
+                string SerialEnd = null;
+                uint ecx = 0x4E6AF4BC;
+                char[] asciiBytes = Nickname.ToCharArray();
+
+                //calcul de la fin du serial
+                for (int i = 0; i < (pseudo.Length - 3); ++i)
+                {
+                    ecx += ecx ^ asciiBytes[i];
+                    ecx <<= 1;
+                }
+                SerialEnd = ecx.ToString();
+                string result = String.Format("{0}-{1}", "MEOOW", SerialEnd);
+                return result;
+            }
+            else
+            {
+                return "vous devez avoir plus de quatres caractères";
+            }
+        }
+        #endregion 
     }
 }
