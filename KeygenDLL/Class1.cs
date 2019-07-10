@@ -152,10 +152,10 @@ namespace KeygenDLL
                     {
                         esi = eax;
                         esi ^= ecx;
-                        int si = esi % 10000;
+                        //int si = esi % 10000;
                                                 
                         //if (si != Math.Abs(si))
-                        if (si <0 )
+                        if (esi <0 )
                         {
                             eax <<= 1; //shl en asm, décalage des bits vers la gauche
                         }
@@ -169,7 +169,9 @@ namespace KeygenDLL
                     ecx += 1;
                 }
                 eax += 0x63;
-                Serial_debut = eax.ToString("x4").Substring(4);
+                Serial_debut = eax.ToString("x4");
+                Serial_debut = Serial_debut.Substring(Serial_debut.Length - 4, 4);
+
                 string result = String.Format("{0:X4}{1:X4}", Serial_debut, Serial_fin).ToUpper();
                 return result;
             }
