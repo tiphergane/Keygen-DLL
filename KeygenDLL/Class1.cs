@@ -151,9 +151,11 @@ namespace KeygenDLL
                     for (int k = boucle; k > 0; k--)
                     {
                         esi = eax;
-                        esi ^= ecx, ecx;
+                        esi ^= ecx;
                         int si = esi % 10000;
-                        if (si != Math.Abs(si))
+                                                
+                        //if (si != Math.Abs(si))
+                        if (si <0 )
                         {
                             eax <<= 1; //shl en asm, décalage des bits vers la gauche
                         }
