@@ -127,13 +127,13 @@ namespace KeygenDLL
 
                 string Serial_fin = null;
                 string Serial_debut = null;
-                int ecx = 0;
-                int eax = 0;
-                int esi = 0;
+                uint ecx = 0;
+                uint eax = 0;
+                uint esi;
                 int Serial = 0;
                 int j = 0;
                 char[] asciiBytes = Nickname.ToCharArray();
-
+                #region Fin Sérial
                 //calcul de la fin du serial
                 for (int i = 0; i < pseudo.Length; ++i)
                 {
@@ -143,19 +143,20 @@ namespace KeygenDLL
                 }
 
                 Serial = 0;
-
+                //Transmet hors de la DLL le résultat de la génération
+                //return Serial_fin;
+                #endregion
+                #region Début Sérial
                 for (int l = 0; l < pseudo.Length; l++)
                 {
-                    ecx = asciiBytes[l] * 0x100;
+                    ecx = asciiBytes[l];
+                    ecx *= 0x100;
                     int boucle = 8;
                     for (int k = boucle; k > 0; k--)
                     {
                         esi = eax;
                         esi ^= ecx;
-                        //int si = esi % 10000;
-                                                
-                        //if (si != Math.Abs(si))
-                        if (esi <0 )
+                        if ((short)((ushort)esi & ~0xFFFF0000) > 0)
                         {
                             eax <<= 1; //shl en asm, décalage des bits vers la gauche
                         }
@@ -166,13 +167,11 @@ namespace KeygenDLL
                         }
                         ecx <<= 1;
                     }
-                    ecx += 1;
                 }
                 eax += 0x63;
-                Serial_debut = eax.ToString("x4");
-                Serial_debut = Serial_debut.Substring(Serial_debut.Length - 4, 4);
-
-                string result = String.Format("{0:X4}{1:X4}", Serial_debut, Serial_fin).ToUpper();
+                #endregion
+                Serial_debut = Convert.ToString(eax & ~0xFFFF0000, 16);
+                string result = String.Format("{0}{1}", Serial_debut, Serial_fin).ToUpper();
                 return result;
             }
 
