@@ -113,8 +113,7 @@ namespace KeygenDLL
 
         #region Keygen2
         /// <summary>
-        /// création du premier Keygen de la DLL, tout le code est transposé dans la DLL
-        /// on ne s'occupe pas de la GUI ici.
+        /// comme pour le premier Keygen, nous nous occupons uniquement du code et pas la GUI
         /// </summary>
         /// <param name="pseudo"></param>
         /// <returns></returns>
