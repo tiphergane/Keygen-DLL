@@ -156,7 +156,7 @@ namespace KeygenDLL
                     {
                         esi = eax;
                         esi ^= ecx;
-                        if ((short)((ushort)esi & ~0xFFFF0000) > 0)
+                        if ((short)((ushort)esi & ~0xFFFF0000) > 0) //compare un entier non signé sur 16 bits
                         {
                             eax <<= 1; //shl en asm, décalage des bits vers la gauche
                         }
@@ -170,6 +170,7 @@ namespace KeygenDLL
                 }
                 eax += 0x63;
                 #endregion
+                //formate la réponse en utilisant le masque sur 16 bits, et le converti au format hexadecimale (base16)
                 Serial_debut = Convert.ToString(eax & ~0xFFFF0000, 16);
                 string result = String.Format("{0}{1}", Serial_debut, Serial_fin).ToUpper();
                 return result;
