@@ -169,7 +169,7 @@ namespace KeygenDLL
                 }
                 eax += 0x63;
                 #endregion
-                //formate la réponse en utilisant le masque sur 16 bits, et le converti au format hexadecimale (base16)
+                //formate la réponse en utilisant le masque sur 16 bits, et le converti au format hexadecimal (base16)
                 Serial_debut = Convert.ToString(eax & ~0xFFFF0000, 16);
                 string result = String.Format("{0}{1}", Serial_debut, Serial_fin).ToUpper();
                 return result;
